@@ -1,0 +1,8 @@
+# build .o file
+nasm -f elf64 -o hello.o hello.asm
+
+# link it to exe
+ld hello.o -o hello
+
+# run executable
+./hello
