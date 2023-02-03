@@ -1,5 +1,5 @@
 section .data
-    text1 db "",10
+    text1 db "eee",10
     digit db 0,10
 
 section .bss
@@ -12,6 +12,7 @@ _start:
 
     mov rax, 5
     call _printRAXDigit
+    call _printText1
 
     mov rax, 60
     mov rdi, 0
@@ -31,7 +32,7 @@ _printText1:
     mov rax, 1
     mov rdi, 1
     mov rsi, text1
-    mov rdx, 25
+    mov rdx, 4
     syscall
     ret
 
