@@ -1,6 +1,7 @@
 section .data
     text1 db "what i s your name bitch",10
     text2 db "Hello, "
+    digit db 0,10
 
 section .bss
     name resb 16
@@ -10,14 +11,22 @@ section .text
 
 _start:
 
-    call _printText1
-    call _getName
-    call _printText2
-    call _printName
+    mov rax, 5
+    call _printRAXDigit
 
     mov rax, 60
     mov rdi, 0
     syscall
+
+_printRAXDigit:
+    add rax, 48
+    mov [digit], al
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, digit
+    mov rdx, 2
+    syscall
+    ret
 
 _printText1:
     mov rax, 1
