@@ -10,9 +10,16 @@ section .text
 
 _start:
 
-    mov rax, 5
+    push 4
+    push 5
+    push 9
+
+    pop rax
     call _printRAXDigit
-    call _printText1
+    pop rax
+    call _printRAXDigit
+    pop rax
+    call _printRAXDigit
 
     mov rax, 60
     mov rdi, 0
