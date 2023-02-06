@@ -1,5 +1,6 @@
 section .data
-    text1 db "eee",10
+    text db "eee",10,0
+    text1 db "JifneiufniwuenfiquwnejnefwjefjwEFwheflqwhenfjqweh w f wf wf ",10,0
     digit db 0,10
 
 section .bss
@@ -9,18 +10,11 @@ section .text
     global _start
 
 _start:
+    mov rax, text1
+    call _print
+    call _exit
 
-    push 4
-    push 5
-    push 9
-
-    pop rax
-    call _printRAXDigit
-    pop rax
-    call _printRAXDigit
-    pop rax
-    call _printRAXDigit
-
+_exit:
     mov rax, 60
     mov rdi, 0
     syscall
@@ -35,11 +29,22 @@ _printRAXDigit:
     syscall
     ret
 
-_printText1:
+;input: rax
+;output: print string at address in rax
+_print:
+    push rax
+    mov rbx, 0
+_printLoop:
+    inc rax
+    inc rbx
+    mov cl, [rax]
+    cmp cl, 0
+    jne _printLoop
+
     mov rax, 1
     mov rdi, 1
-    mov rsi, text1
-    mov rdx, 4
+    pop rsi
+    mov rdx, rbx
     syscall
     ret
 
